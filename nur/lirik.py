@@ -1,5 +1,6 @@
 import time
 start_time = time.time()
+
 print("Terakhir ku masih lebih kecil darimu")
 print("Sekarang bisa ku lihat atas kepalamu")
 print("Yang ternyata memutih")
