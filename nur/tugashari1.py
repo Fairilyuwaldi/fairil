@@ -1,5 +1,4 @@
-print("Mengecek sistem laptop...")
+print("Mengecek sistem laptop")
 print("[OK]Visual Studio Code terpasang.")
-print("[OK]Mesin Python siap digunakan.")
-print("[OK]Akun GitHub sudah aktif.")
-print("STATUS: 100% SIAP BEKERJA!")
+print("OK Mesin Python siap digunakan.")
+print("STATUS: 100% SIAP BEKERJA")

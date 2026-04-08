@@ -1,0 +1,1 @@
+print("GAME TIC-TAC-TOE\nGiliran: Pemain 1 (X)\n\n | | \n | X | | O \n X \n____|____|____\n | | \n | | X | O \n____|____|____\n | | \n O | | X \n | | \n\n Sistem menunggu langkahmu...")
