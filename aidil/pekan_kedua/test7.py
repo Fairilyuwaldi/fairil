@@ -1,4 +1,4 @@
-# If dan Else Statement
+
 
 # 1. if nya
 # 2. kondisinya
@@ -12,7 +12,7 @@ nama = input ("Siapa nama anda? ")
 
 # 1. program if inline
 # if nama=="ucup" : print("kamu gnteng abis")
-# print(f"Terima Kasih {nama}")
+# print(f"Terima Kasih {#nama}")
 
 # 2. program if indentation
 
