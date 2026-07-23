@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GovMonitor | Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-surface": "#191c1d",
+                "tertiary-fixed-dim": "#ffb957",
+                "surface-dim": "#d9dadb",
+                "inverse-primary": "#a3c9ff",
+                "on-primary-fixed": "#001c38",
+                "tertiary": "#4a2d00",
+                "on-primary": "#ffffff",
+                "inverse-surface": "#2e3132",
+                "surface-container-lowest": "#ffffff",
+                "secondary-fixed-dim": "#88d982",
+                "on-secondary": "#ffffff",
+                "surface-container-high": "#e7e8e9",
+                "primary-container": "#004b87",
+                "background": "#f8f9fa",
+                "on-tertiary": "#ffffff",
+                "error": "#ba1a1a",
+                "on-secondary-fixed": "#002204",
+                "on-error": "#ffffff",
+                "surface-container": "#edeeef",
+                "on-tertiary-fixed-variant": "#643f00",
+                "secondary": "#1b6d24",
+                "outline-variant": "#c2c6d1",
+                "surface-tint": "#27609d",
+                "on-secondary-container": "#217128",
+                "on-tertiary-container": "#faa926",
+                "primary": "#003461",
+                "surface-container-highest": "#e1e3e4",
+                "on-secondary-fixed-variant": "#005312",
+                "surface-variant": "#e1e3e4",
+                "on-primary-fixed-variant": "#004882",
+                "secondary-container": "#a0f399",
+                "outline": "#727781",
+                "surface-container-low": "#f3f4f5",
+                "status-error": "#C62828",
+                "primary-fixed": "#d3e4ff",
+                "surface": "#f8f9fa",
+                "inverse-on-surface": "#f0f1f2",
+                "status-success": "#1B5E20",
+                "on-background": "#191c1d",
+                "primary-fixed-dim": "#a3c9ff",
+                "error-container": "#ffdad6",
+                "on-error-container": "#93000a",
+                "gov-navy": "#003366",
+                "tertiary-fixed": "#ffddb5",
+                "secondary-fixed": "#a3f69c",
+                "tertiary-container": "#684200",
+                "on-primary-container": "#8abcff",
+                "on-tertiary-fixed": "#2a1800",
+                "surface-bright": "#f8f9fa",
+                "surface-border": "#DEE2E6",
+                "on-surface-variant": "#424750"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "margin-mobile": "16px",
+                "stack-sm": "8px",
+                "margin-desktop": "32px",
+                "widget-padding": "24px",
+                "stack-md": "16px",
+                "gutter": "24px"
+            },
+            "fontFamily": {
+                "headline-md": ["Public Sans"],
+                "headline-lg": ["Public Sans"],
+                "label-sm": ["JetBrains Mono"],
+                "body-md": ["Public Sans"],
+                "label-md": ["JetBrains Mono"],
+                "body-sm": ["Public Sans"],
+                "headline-sm": ["Public Sans"],
+                "body-lg": ["Public Sans"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Public Sans', sans-serif; }
+        .data-visualization-pill { height: 4px; border-radius: 2px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #DEE2E6; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface flex min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="fixed left-0 top-0 h-full w-[280px] z-40 bg-surface-container-low border-r border-surface-border flex flex-col py-widget-padding px-stack-md gap-stack-md">
+<div class="flex items-center gap-3 px-2 mb-4">
+<div class="w-10 h-10 bg-gov-navy rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-gov-navy">Local Gov</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Monitoring Suite</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<!-- Active: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">language</span>
+<span class="font-label-md text-label-md">Subdomains</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">warning</span>
+<span class="font-label-md text-label-md">Incidents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-4">
+<button class="w-full bg-gov-navy text-white font-label-md text-label-md py-3 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+                Add Subdomain
+            </button>
+<div class="pt-4 border-t border-surface-border">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Log Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-[280px] min-h-screen flex flex-col">
+<!-- TopNavBar Component -->
+<header class="flex justify-between items-center w-full px-margin-desktop bg-surface h-16 border-b border-surface-border sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="font-headline-md text-headline-md font-bold text-gov-navy uppercase tracking-tight">GovMonitor</div>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="#">Overview</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors px-2 py-1 rounded" href="#">Activity Log</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors px-2 py-1 rounded" href="#">Regional Health</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">search</span>
+<input class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-1.5 font-body-sm text-body-sm focus:ring-2 focus:ring-primary w-64" placeholder="Search systems..." type="text"/>
+</div>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a senior government official in formal attire, set against a blurred background of a modern civic office. The lighting is soft and authoritative, emphasizing institutional trust and experience. The aesthetic is clean and high-contrast, fitting a corporate monitoring dashboard interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ0YSrInUTEz16vZ3J0q1OwaQTxLUWzB4-41fyggeLyn_2GHlslysbnHCf0gcyG4MeXTTGCTFiBJdG2ECqXH5F5dS7oO0FHbz_j0b-OSl0EaZQlexMY_XyUBK03h5cDgsThnjmafRy2NeFzQ5A1Gx2d4B7Xc6c2qBf-3dPOtgDiptQKAv177A36gMyc7F4X5kWww0bVpnQKIOME_2Xmx9kLxKxGh0pbXJcNcWNIe8bxoOsFYq8MhZ_t5qQVwD_kHG-wWKgBxUy6zM"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<section class="p-margin-desktop space-y-8 max-w-[1440px] w-full">
+<!-- Global Status Overview -->
+<div>
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-headline-md text-headline-md text-gov-navy">Global Status Overview</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1 rounded-full flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-success animate-pulse"></span>
+                        Live Updates
+                    </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Uptime Card -->
+<div class="bg-surface border border-surface-border p-widget-padding rounded-lg flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Aggregate Uptime</span>
+<div class="flex items-end gap-2">
+<span class="font-headline-lg text-headline-lg text-gov-navy">99.4%</span>
+<span class="font-label-sm text-label-sm text-status-success mb-2">↑ 0.2%</span>
+</div>
+<div class="mt-4 flex gap-1">
+<div class="flex-1 data-visualization-pill bg-status-success"></div>
+<div class="flex-1 data-visualization-pill bg-status-success"></div>
+<div class="flex-1 data-visualization-pill bg-status-success"></div>
+<div class="flex-1 data-visualization-pill bg-status-success"></div>
+<div class="flex-1 data-visualization-pill bg-status-error opacity-40"></div>
+<div class="flex-1 data-visualization-pill bg-status-success"></div>
+<div class="flex-1 data-visualization-pill bg-status-success"></div>
+</div>
+</div>
+<!-- Active Alerts Card -->
+<div class="bg-surface border border-surface-border p-widget-padding rounded-lg flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Active Alerts</span>
+<div class="flex items-end gap-2">
+<span class="font-headline-lg text-headline-lg text-error">03</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-2">Systems Critical</span>
+</div>
+<div class="mt-4 flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white bg-error-container text-on-error-container text-[10px] flex items-center justify-center font-bold">!</div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-error-container text-on-error-container text-[10px] flex items-center justify-center font-bold">!</div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-error-container text-on-error-container text-[10px] flex items-center justify-center font-bold">!</div>
+</div>
+</div>
+<!-- Avg Response Time -->
+<div class="bg-surface border border-surface-border p-widget-padding rounded-lg flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Avg. Response Time</span>
+<div class="flex items-end gap-2">
+<span class="font-headline-lg text-headline-lg text-gov-navy">132ms</span>
+<span class="font-label-sm text-label-sm text-status-success mb-2">Normal</span>
+</div>
+<div class="mt-4 h-[4px] w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 45%;"></div>
+</div>
+</div>
+<!-- Monitoring Total -->
+<div class="bg-surface border border-surface-border p-widget-padding rounded-lg flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Monitored Entities</span>
+<div class="flex items-end gap-2">
+<span class="font-headline-lg text-headline-lg text-gov-navy">42</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-2">Total Subdomains</span>
+</div>
+<div class="mt-4 flex justify-between items-center text-[10px] font-bold text-on-surface-variant">
+<span>89% REACHABLE</span>
+<span class="material-symbols-outlined text-[14px]">checklist</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Monitoring Cards Grid -->
+<div>
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-headline-sm text-headline-sm text-gov-navy">Subdomain Monitoring</h2>
+<div class="flex-1 h-px bg-surface-border"></div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface border border-surface-border rounded-lg font-label-md text-label-md flex items-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span> Filter
+                        </button>
+<button class="px-4 py-2 bg-surface border border-surface-border rounded-lg font-label-md text-label-md flex items-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">sort</span> Sort
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Monitoring Card 1 -->
+<div class="bg-surface border border-surface-border rounded-lg overflow-hidden flex flex-col group hover:shadow-lg transition-shadow">
+<div class="p-widget-padding border-b border-surface-border flex justify-between items-start">
+<div class="space-y-1">
+<h3 class="font-label-md text-label-md font-bold text-gov-navy truncate max-w-[200px]">bkpsdn.bulukumbakab.go.id</h3>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+<span class="font-label-sm text-label-sm text-status-success uppercase tracking-wider">Online</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">open_in_new</span>
+</div>
+<div class="p-widget-padding space-y-6 flex-1">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Response Time</p>
+<p class="font-headline-sm text-headline-sm text-gov-navy">120ms</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Uptime</p>
+<p class="font-headline-sm text-headline-sm text-gov-navy">99.9%</p>
+</div>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2">History (Last 24h)</p>
+<div class="h-12 w-full flex items-end gap-1">
+<div class="flex-1 bg-secondary opacity-20 h-[80%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-30 h-[85%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-40 h-[75%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-50 h-[90%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-60 h-[95%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-70 h-[88%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-80 h-[92%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary h-[100%] rounded-t-sm"></div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low border-t border-surface-border">
+<button class="w-full py-2 bg-white border border-surface-border rounded font-label-md text-label-md text-gov-navy hover:bg-gov-navy hover:text-white transition-all">
+                                View Details
+                            </button>
+</div>
+</div>
+<!-- Monitoring Card 2 -->
+<div class="bg-surface border border-surface-border rounded-lg overflow-hidden flex flex-col group hover:shadow-lg transition-shadow">
+<div class="p-widget-padding border-b border-surface-border flex justify-between items-start">
+<div class="space-y-1">
+<h3 class="font-label-md text-label-md font-bold text-gov-navy truncate max-w-[200px]">dkpd.bulukumbakab.go.id</h3>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+<span class="font-label-sm text-label-sm text-status-success uppercase tracking-wider">Online</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">open_in_new</span>
+</div>
+<div class="p-widget-padding space-y-6 flex-1">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Response Time</p>
+<p class="font-headline-sm text-headline-sm text-gov-navy">145ms</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Uptime</p>
+<p class="font-headline-sm text-headline-sm text-gov-navy">99.8%</p>
+</div>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2">History (Last 24h)</p>
+<div class="h-12 w-full flex items-end gap-1">
+<div class="flex-1 bg-secondary opacity-20 h-[70%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-30 h-[75%] rounded-t-sm"></div>
+<div class="flex-1 bg-error opacity-40 h-[20%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-50 h-[80%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-60 h-[85%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-70 h-[90%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-80 h-[95%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary h-[100%] rounded-t-sm"></div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low border-t border-surface-border">
+<button class="w-full py-2 bg-white border border-surface-border rounded font-label-md text-label-md text-gov-navy hover:bg-gov-navy hover:text-white transition-all">
+                                View Details
+                            </button>
+</div>
+</div>
+<!-- Monitoring Card 3 -->
+<div class="bg-surface border border-surface-border rounded-lg overflow-hidden flex flex-col group hover:shadow-lg transition-shadow">
+<div class="p-widget-padding border-b border-surface-border flex justify-between items-start">
+<div class="space-y-1">
+<h3 class="font-label-md text-label-md font-bold text-gov-navy truncate max-w-[200px]">pustaka.bulukumbakab.go.id</h3>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-error"></span>
+<span class="font-label-sm text-label-sm text-status-error uppercase tracking-wider">Maintenance</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">settings_slow_motion</span>
+</div>
+<div class="p-widget-padding space-y-6 flex-1">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Response Time</p>
+<p class="font-headline-sm text-headline-sm text-outline">--</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Uptime</p>
+<p class="font-headline-sm text-headline-sm text-gov-navy">98.5%</p>
+</div>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2">History (Last 24h)</p>
+<div class="h-12 w-full flex items-end gap-1">
+<div class="flex-1 bg-secondary opacity-40 h-[90%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-40 h-[90%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary opacity-40 h-[90%] rounded-t-sm"></div>
+<div class="flex-1 bg-tertiary-fixed-dim h-[100%] rounded-t-sm"></div>
+<div class="flex-1 bg-tertiary-fixed-dim h-[100%] rounded-t-sm"></div>
+<div class="flex-1 bg-tertiary-fixed-dim h-[100%] rounded-t-sm"></div>
+<div class="flex-1 bg-tertiary-fixed-dim h-[100%] rounded-t-sm"></div>
+<div class="flex-1 bg-tertiary-fixed-dim h-[100%] rounded-t-sm"></div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low border-t border-surface-border">
+<button class="w-full py-2 bg-white border border-surface-border rounded font-label-md text-label-md text-gov-navy hover:bg-gov-navy hover:text-white transition-all">
+                                View Details
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Regional Activity Feed -->
+<div class="bg-surface border border-surface-border rounded-lg overflow-hidden">
+<div class="px-6 py-4 border-b border-surface-border bg-gov-navy text-white flex justify-between items-center">
+<h3 class="font-label-md text-label-md font-bold">Recent Monitoring Activity</h3>
+<span class="material-symbols-outlined text-[18px]">history</span>
+</div>
+<div class="p-6">
+<div class="space-y-6 relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-surface-container">
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-secondary-fixed flex items-center justify-center border-4 border-white shadow-sm z-10">
+<span class="material-symbols-outlined text-[14px] text-on-secondary-fixed">check</span>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-body-md text-body-md font-bold text-gov-navy">Subdomain "bkpsdn" reported 100% reachability</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Routine check completed successfully from Java-1 region.</p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2 mins ago</span>
+</div>
+</div>
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-tertiary-fixed flex items-center justify-center border-4 border-white shadow-sm z-10">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary-fixed">build</span>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-body-md text-body-md font-bold text-gov-navy">Maintenance mode enabled for "pustaka"</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Scheduled database migration by Admin ID: 9422.</p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">45 mins ago</span>
+</div>
+</div>
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-error-container flex items-center justify-center border-4 border-white shadow-sm z-10">
+<span class="material-symbols-outlined text-[14px] text-on-error-container">warning</span>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-body-md text-body-md font-bold text-gov-navy">Latency spike detected in Regional Node 4</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Affected 4 subdomains. Automatic rerouting initiated.</p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1h 12m ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+        // Simple micro-interaction for active cards
+        document.querySelectorAll('.bg-surface.border').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'transform 0.2s ease-out';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

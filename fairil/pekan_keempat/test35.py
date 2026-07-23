@@ -35,5 +35,6 @@ def math(*args,**kwargs):
 hasil = math(1,2,3,4,option="tambah")
 
 print(f"hasil jumlah {hasil}")
+
 hasil = math(1,2,3,4,option="kali")
 print(f"hasil kali {hasil}")
