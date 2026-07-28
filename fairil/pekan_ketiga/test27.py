@@ -19,7 +19,7 @@ print("-"*20)
 
 mahasiswa = dict.fromkeys(mahasiswa_template.keys())
 mahasiswa['nama'] = input("Nama Mahasiswa: ")
-mahasiswa['Nin'] = input("Nama Mahasiswa: ")
+mahasiswa['Nim'] = input("NIM Mahasiswa: ")
 mahasiswa['sks_lulus'] = int(input("SKS lulus: "))
 TAHUN_LAHIR = int(input("Tahun lahir (YYYY):"))
 BULAN_LAHIR = int(input("Bulan lahir (1-12):"))

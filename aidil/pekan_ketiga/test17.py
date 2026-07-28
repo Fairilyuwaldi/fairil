@@ -23,3 +23,13 @@ for peserta in list_peserta:
     print(f"nama\t: {peserta[0]}")
     print(f"umur\t: {peserta[1]}")
     print(f"gender\t: {peserta[2]}\n")
+
+
+# dengan reference 
+
+list_copy = list_peserta.copy();
+print(f"peserta = {list_copy}")
+peserta_0[0] = "michael"
+print(f"peserta = {list_copy}")
+print(f"peserta = {list_peserta}")
+

@@ -21,7 +21,7 @@ index_ujang = data.index("ujang")
 print(f"index si dudung = {index_dudung}")
 print(f"index si ujang = {index_ujang}")
 
-#mengurangi list
+# mengurangi list
 print(f"data angka sebelum sort = \n{data_angka}")
 data_angka.sort()
 print(f"data angka sort = \n {data_angka}")
