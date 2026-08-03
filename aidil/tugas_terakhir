@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Civic Oversight | BKPSDM Monitoring</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..900&family=Public+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#874001",
+                    "error": "#ba1a1a",
+                    "ink-deep": "#0F172A",
+                    "on-primary-container": "#a5cbff",
+                    "primary-fixed-dim": "#a1c9ff",
+                    "secondary": "#006b5f",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#eff4ff",
+                    "primary-container": "#005696",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#733500",
+                    "inverse-surface": "#213145",
+                    "surface-container": "#e5eeff",
+                    "outline": "#727781",
+                    "inverse-primary": "#a1c9ff",
+                    "status-critical": "#E11D48",
+                    "secondary-fixed-dim": "#4fdbc8",
+                    "surface": "#f8f9ff",
+                    "surface-variant": "#d3e4fe",
+                    "on-background": "#0b1c30",
+                    "outline-variant": "#c1c7d2",
+                    "primary": "#003e6f",
+                    "on-surface": "#0b1c30",
+                    "on-error": "#ffffff",
+                    "status-warning": "#F59E0B",
+                    "on-surface-variant": "#414750",
+                    "on-tertiary-fixed": "#311300",
+                    "surface-subtle": "#F8FAFC",
+                    "on-secondary-container": "#006f64",
+                    "on-tertiary-container": "#ffb98d",
+                    "background": "#f8f9ff",
+                    "secondary-container": "#6df5e1",
+                    "on-secondary-fixed": "#00201c",
+                    "surface-container-high": "#dce9ff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#ffdbc7",
+                    "on-primary-fixed-variant": "#004880",
+                    "surface-dim": "#cbdbf5",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#d3e4fe",
+                    "surface-tint": "#1961a1",
+                    "primary-fixed": "#d2e4ff",
+                    "tertiary": "#642d00",
+                    "surface-bright": "#f8f9ff",
+                    "tertiary-fixed-dim": "#ffb688",
+                    "on-secondary-fixed-variant": "#005048",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#71f8e4",
+                    "status-success": "#10B981",
+                    "on-primary-fixed": "#001c37"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-lg": "48px",
+                    "container-padding": "24px",
+                    "margin-sm": "16px",
+                    "gutter": "16px",
+                    "base": "8px",
+                    "margin-md": "32px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Public Sans"],
+                    "headline-lg": ["Public Sans"],
+                    "headline-sm": ["Public Sans"],
+                    "data-display": ["JetBrains Mono"],
+                    "body-lg": ["Public Sans"],
+                    "label-caps": ["JetBrains Mono"],
+                    "body-md": ["Public Sans"],
+                    "headline-lg-mobile": ["Public Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "data-display": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #F8FAFC;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .status-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-padding h-16 bg-surface-lowest border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">Civic Oversight</span>
+<nav class="hidden lg:flex items-center gap-6 ml-8">
+<a class="text-on-surface-variant hover:bg-surface-container transition-colors px-3 py-2 rounded" href="#">Dashboard</a>
+<a class="text-primary font-semibold border-b-2 border-primary px-3 py-2" href="#">Incidents</a>
+<a class="text-on-surface-variant hover:bg-surface-container transition-colors px-3 py-2 rounded" href="#">Maintenance</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-48" placeholder="Search..." type="text"/>
+</div>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">notifications</button>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">settings</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a government administrator in a clean, high-key studio setting. The lighting is soft and corporate, matching a modern light-mode UI aesthetic. The individual wears professional attire, conveying authority and approachability in the context of a regency monitoring system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC19eB_1mIHuYB-Qf1UzotFiUtCDxUGAl_vlKSeZjvKbGjKWHHINN6h9_yjld6jJhX9kBjcRCIILsm_J9xAXdi2O-ytDg_Q1z_p4m4aXI66HeIsWYcSaWDbuxic2HbwP0jViYoUYi3BPumkEetyxJiA2ADlJsC0vfrPRYlwCrTInRuQUT7oL48FObSTHS7kRFR-vrlw9pOkBuMwPHMl3fJNUnROWI3n-g-zeLbLAum5N8cOZlfQ_q7"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Visible on LG) -->
+<aside class="hidden lg:flex flex-col fixed left-0 top-0 h-full w-[280px] bg-surface-subtle border-r border-outline-variant pt-20 p-gutter">
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-10 h-10 bg-primary-container rounded flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Monitoring System</h2>
+<p class="text-body-md text-on-surface-variant">Regency of Bulukumba</p>
+</div>
+</div>
+<nav class="space-y-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 duration-200 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold hover:translate-x-1 duration-200 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+<span class="font-body-md">BKPSDM</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 duration-200 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dns">dns</span>
+<span class="font-body-md">DKPD</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:translate-x-1 duration-200 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-body-md">Pustaka</span>
+</a>
+</nav>
+<button class="mb-6 w-full py-3 bg-primary text-white rounded-lg font-semibold hover:opacity-90 transition-opacity">
+            Generate Report
+        </button>
+<div class="border-t border-outline-variant pt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="health_and_safety">health_and_safety</span>
+<span>System Status</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-[280px] pt-24 px-container-padding pb-margin-lg">
+<!-- Header Section -->
+<div class="mb-margin-md flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<nav class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="text-label-caps font-label-caps">MONITORING</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-label-caps font-label-caps text-primary">BKPSDM.BULUKUMBAKAB.GO.ID</span>
+</nav>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Statistik Subdomain BKPSDM</h1>
+<p class="text-body-lg text-on-surface-variant">Laporan real-time infrastruktur digital Badan Kepegawaian dan Pengembangan SDM.</p>
+</div>
+<!-- Maintenance Toggle -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-status-success status-pulse"></div>
+<div>
+<p class="text-label-caps font-label-caps text-on-surface-variant uppercase">STATUS SERVER</p>
+<p class="font-bold text-on-surface">OPERASIONAL</p>
+</div>
+</div>
+<div class="h-10 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-4">
+<span class="text-body-md font-semibold text-on-surface-variant">Mode Pemeliharaan</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" id="maintenance-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Bento Grid Stats -->
+<div class="bento-grid">
+<!-- Traffic Metric Card -->
+<div class="col-span-12 md:col-span-4 bg-surface-container-lowest border border-outline-variant p-container-padding rounded-xl">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Daily Traffic</h3>
+<p class="text-body-md text-on-surface-variant">Lalu Lintas Harian</p>
+</div>
+<span class="material-symbols-outlined text-primary text-[32px]">trending_up</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-data-display text-headline-lg text-primary">12,482</span>
+<span class="text-status-success text-label-caps font-label-caps">+14% vs kemarin</span>
+</div>
+<div class="mt-6 h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 72%;"></div>
+</div>
+</div>
+<!-- Peak Hours Card -->
+<div class="col-span-12 md:col-span-4 bg-surface-container-lowest border border-outline-variant p-container-padding rounded-xl">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Peak Hours</h3>
+<p class="text-body-md text-on-surface-variant">Waktu Tersibuk</p>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[32px]">schedule</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-data-display text-headline-lg text-on-surface">09:00 - 11:30</span>
+<span class="text-on-surface-variant text-body-md">WITA</span>
+</div>
+<p class="mt-4 text-body-md text-on-surface-variant">Rata-rata 450 request/menit pada jendela waktu ini.</p>
+</div>
+<!-- SSL Expiry Card -->
+<div class="col-span-12 md:col-span-4 bg-surface-container-lowest border border-outline-variant p-container-padding rounded-xl relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-[120px] text-on-surface">verified_user</span>
+</div>
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">SSL Certificate</h3>
+<p class="text-body-md text-on-surface-variant">Masa Berlaku Sertifikat</p>
+</div>
+<span class="material-symbols-outlined text-status-success text-[32px]">lock</span>
+</div>
+<div class="flex flex-col relative z-10">
+<span class="font-data-display text-headline-lg text-on-surface">Valid for 180 Days</span>
+<span class="text-on-surface-variant text-label-caps font-label-caps">Exp: 14 September 2024</span>
+</div>
+<div class="mt-4 inline-flex items-center gap-2 px-3 py-1 bg-secondary-container/30 text-on-secondary-container rounded-full">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="text-label-caps font-label-caps">Auto-renewal Active</span>
+</div>
+</div>
+<!-- Chart Section: Response Time -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest border border-outline-variant p-container-padding rounded-xl">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Real-time Response Time</h3>
+<p class="text-body-md text-on-surface-variant">Kecepatan respons server (ms) dalam 10 menit terakhir</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 bg-surface-container text-primary font-semibold rounded-lg text-label-caps font-label-caps">10 MIN</button>
+<button class="px-3 py-1.5 text-on-surface-variant hover:bg-surface-container rounded-lg text-label-caps font-label-caps">1 HOUR</button>
+</div>
+</div>
+<!-- SVG Chart Mockup -->
+<div class="w-full h-64 relative bg-surface-subtle/50 rounded-lg p-4">
+<svg class="w-full h-full" viewbox="0 0 800 200">
+<!-- Grid Lines -->
+<line stroke="#E2E8F0" stroke-dasharray="4" x1="0" x2="800" y1="0" y2="0"></line>
+<line stroke="#E2E8F0" stroke-dasharray="4" x1="0" x2="800" y1="50" y2="50"></line>
+<line stroke="#E2E8F0" stroke-dasharray="4" x1="0" x2="800" y1="100" y2="100"></line>
+<line stroke="#E2E8F0" stroke-dasharray="4" x1="0" x2="800" y1="150" y2="150"></line>
+<!-- Line Path -->
+<path d="M0,150 Q100,140 200,120 T400,100 T600,130 T800,110" fill="none" stroke="#003e6f" stroke-width="3"></path>
+<path d="M0,150 Q100,140 200,120 T400,100 T600,130 T800,110 L800,200 L0,200 Z" fill="url(#chartGradient)"></path>
+<defs>
+<lineargradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#003e6f;stop-opacity:0.1"></stop>
+<stop offset="100%" style="stop-color:#003e6f;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+<!-- Data Points -->
+<circle cx="200" cy="120" fill="#003e6f" r="4"></circle>
+<circle cx="400" cy="100" fill="#003e6f" r="4"></circle>
+<circle cx="600" cy="130" fill="#003e6f" r="4"></circle>
+</svg>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between text-label-caps font-label-caps text-outline">
+<span>14:00</span>
+<span>14:02</span>
+<span>14:04</span>
+<span>14:06</span>
+<span>14:08</span>
+<span>14:10</span>
+</div>
+</div>
+</div>
+<!-- Side Card: Subdomain Info -->
+<div class="col-span-12 lg:col-span-4 bg-primary text-white p-container-padding rounded-xl flex flex-col justify-between">
+<div>
+<span class="text-label-caps font-label-caps opacity-80 uppercase tracking-widest">SUBDOMAIN INFO</span>
+<h2 class="font-headline-md text-headline-md mt-2 mb-6">Infrastruktur BKPSDM</h2>
+<ul class="space-y-4">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined opacity-70">dns</span>
+<div>
+<p class="text-label-caps font-label-caps opacity-60">SERVER IP</p>
+<p class="font-data-display text-body-lg">103.142.12.84</p>
+</div>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined opacity-70">cloud</span>
+<div>
+<p class="text-label-caps font-label-caps opacity-60">SERVICE PROVIDER</p>
+<p class="font-body-lg">Regency Data Center</p>
+</div>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined opacity-70">update</span>
+<div>
+<p class="text-label-caps font-label-caps opacity-60">UPTIME</p>
+<p class="font-body-lg">99.98% (30 Hari Terakhir)</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-8 border-t border-white/20">
+<p class="text-body-md opacity-80 italic">"Menjamin ketersediaan data kepegawaian Bulukumba 24/7."</p>
+</div>
+</div>
+<!-- Access Log Table -->
+<div class="col-span-12 bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<div class="p-container-padding border-b border-outline-variant flex justify-between items-center">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Recent Access Logs</h3>
+<p class="text-body-md text-on-surface-variant">Log akses terbaru untuk bkpsdm.bulukumbakab.go.id</p>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant rounded-lg hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span class="font-body-md font-semibold">Export Log</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-subtle text-label-caps font-label-caps text-on-surface-variant">
+<tr>
+<th class="px-6 py-4">TIMESTAMP</th>
+<th class="px-6 py-4">USER ID / IP</th>
+<th class="px-6 py-4">AKSI</th>
+<th class="px-6 py-4">ENDPOINT</th>
+<th class="px-6 py-4">STATUS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-subtle transition-colors">
+<td class="px-6 py-4 font-data-display text-body-md">2024-03-24 14:12:05</td>
+<td class="px-6 py-4 text-on-surface font-semibold">Admin_01 (192.168.1.42)</td>
+<td class="px-6 py-4 text-on-surface-variant">Login Success</td>
+<td class="px-6 py-4 font-data-display text-label-caps">/auth/login</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-status-success/10 text-status-success text-label-caps font-label-caps rounded">200 OK</span>
+</td>
+</tr>
+<tr class="bg-surface-subtle/30 hover:bg-surface-subtle transition-colors">
+<td class="px-6 py-4 font-data-display text-body-md">2024-03-24 14:11:48</td>
+<td class="px-6 py-4 text-on-surface font-semibold">Public (10.22.44.112)</td>
+<td class="px-6 py-4 text-on-surface-variant">Get Profile Data</td>
+<td class="px-6 py-4 font-data-display text-label-caps">/api/v1/pegawai</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-status-success/10 text-status-success text-label-caps font-label-caps rounded">200 OK</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-subtle transition-colors">
+<td class="px-6 py-4 font-data-display text-body-md">2024-03-24 14:10:33</td>
+<td class="px-6 py-4 text-on-surface font-semibold">User_84 (36.72.10.5)</td>
+<td class="px-6 py-4 text-on-surface-variant">File Upload</td>
+<td class="px-6 py-4 font-data-display text-label-caps">/api/upload/skp</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-status-warning/10 text-status-warning text-label-caps font-label-caps rounded">201 CREATED</span>
+</td>
+</tr>
+<tr class="bg-surface-subtle/30 hover:bg-surface-subtle transition-colors">
+<td class="px-6 py-4 font-data-display text-body-md">2024-03-24 14:09:12</td>
+<td class="px-6 py-4 text-on-surface font-semibold">Guest (112.4.22.90)</td>
+<td class="px-6 py-4 text-on-surface-variant">Unauthorized Access</td>
+<td class="px-6 py-4 font-data-display text-label-caps">/admin/config</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-status-critical/10 text-status-critical text-label-caps font-label-caps rounded">403 FORBIDDEN</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<!-- Interactive script for demo micro-interactions -->
+<script>
+        document.getElementById('maintenance-toggle').addEventListener('change', function(e) {
+            const statusIndicator = document.querySelector('.status-pulse');
+            const statusText = document.querySelector('.status-pulse + div p:last-child');
+            
+            if(e.target.checked) {
+                statusIndicator.classList.remove('bg-status-success');
+                statusIndicator.classList.add('bg-status-warning');
+                statusText.innerText = 'PEMELIHARAAN';
+                statusText.classList.add('text-status-warning');
+                console.log("Maintenance mode activated");
+            } else {
+                statusIndicator.classList.add('bg-status-success');
+                statusIndicator.classList.remove('bg-status-warning');
+                statusText.innerText = 'OPERASIONAL';
+                statusText.classList.remove('text-status-warning');
+                console.log("Maintenance mode deactivated");
+            }
+        });
+
+        // Simple animation for the bar chart
+        window.addEventListener('load', () => {
+            const bar = document.querySelector('.bg-primary');
+            bar.style.width = '0%';
+            setTimeout(() => {
+                bar.style.transition = 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                bar.style.width = '72%';
+            }, 300);
+        });
+    </script>
+</body></html>
